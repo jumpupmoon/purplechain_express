@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = process.env.PORT || 4500;
+const port = process.env.PORT;
 
 // Static File Service
 app.use(express.static("public"));
