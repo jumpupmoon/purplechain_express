@@ -1,6 +1,7 @@
 //var request = require("request");
 //var cheerio = require("cheerio");
 const request = require('request-promise-native');
+var util = require('util');
 
 var diseaseInfoService = {};
 
@@ -10,6 +11,8 @@ var ServiceKey =
   "Y79MZBb9ME6yzBoRjLuTbaQPWv0HlA7U0KQ2wCnXlzzu8itvKlrURot8dqTHWmRpodg68%2BBr%2B0I%2Bg0HgHhKQIg%3D%3D";
 
 diseaseInfoService.getDissNameCodeList = function (searchText) {
+  var Disease = {};
+
   var url =
     "http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList";
   //   페이지 번호
@@ -73,6 +76,8 @@ diseaseInfoService.getDissNameCodeList = function (searchText) {
       var obj = JSON.parse(jsonObject);
       sickCd = obj.response.body.items.item.sickCd;
       sickNm = obj.response.body.items.item.sickNm;
+      Disease.sickCd = sickCd;
+      Disease.sickNm = sickNm;
       console.log("obj", obj);
       console.log("sickCd", sickCd);
       console.log("sickNm", sickNm);
@@ -83,17 +88,12 @@ diseaseInfoService.getDissNameCodeList = function (searchText) {
       // console.log("sickCd", $("sickCd").text());
 
       // console.log("items2", body.body);
-      return sickCd;
 
+      console.log("객체확인!!!!!!!!!!!!!!!!!!!!\n", util.inspect(Disease, true, null));
     }
-  ).then(function (result) {
-    var test2 = JSON.parse(result);
-    var test3 = test2.response.body.items.item.sickCd;
-    console.log(test3);
-    return test3;
-  })
+  ).then().catch(err => callback(err));
 
-
+  return sickCd;
 
 
 

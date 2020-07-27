@@ -59,6 +59,7 @@ router.get("/diseaseInfo", (req, res) => {
 
   var searchText = "병적 골절을";
   var sickCd = DiseaseInfo.getDissNameCodeList(searchText);
+  console.log(DiseaseInfo.getDissNameCodeList);
   setTimeout(() => {
 
     console.log("sickCD-->", sickCd);
