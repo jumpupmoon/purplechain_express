@@ -72,7 +72,7 @@ router.get("/diseaseInfo", (req, res) => {
 
 
 });
-//약 정보 검색
+//의약제품 정보 검색
 router.get("/medicineInfo", (req, res) => {
   // 품목, 저장방법, 성상등의 품목정보 등의 허가받은 의약제품정보를 상세정보로 제공
   var searchText2 = "마데카솔연고";
