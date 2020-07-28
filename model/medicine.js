@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
-const medicineSchema = mongoose.Schema({
+const medicineSchema = new mongoose.Schema({
     seq: String,
     name: String,
     chart: String,
-    EE_DOC: Schema.types.Mixed,
-    UD_DOC: Schema.types.Mixed
+    storage_method: String,
+    EE_DOC: [String],
+    UD_DOC: [mongoose.Schema.Types.Mixed],
 
 }, { versionKey: false });
 
