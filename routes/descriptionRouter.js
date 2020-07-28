@@ -18,7 +18,7 @@ router.get('/search', (req, res) => {
     if(req.query.doctor) search.doctor = req.query.doctor;
     if(req.query.sort == 'patient') sort = {patient: 1};
 
-    const page = parseInt(req.query.page);
+    const page = req.query.page;
     const limit = 3;
     const startIndex = (page - 1) * limit;
     let endPage;
@@ -32,7 +32,7 @@ router.get('/search', (req, res) => {
         .limit(limit).skip(startIndex)
         .then(docs => {
             if(!docs) console.log('error ->', err);
-            res.json([{"docs": docs}, {endPage}]);
+            res.json([docs, endPage]);
         });
 });
 
