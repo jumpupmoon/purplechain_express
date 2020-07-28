@@ -18,13 +18,21 @@ router.get('/search', (req, res) => {
     if(req.query.doctor) search.doctor = req.query.doctor;
     if(req.query.sort == 'patient') sort = {patient: 1};
 
+    const page = parseInt(req.query.page);
+    const limit = 3;
+    const startIndex = (page - 1) * limit;
+    let endPage;
+    Description.countDocuments('_id', (err, count) => {
+        endPage = Math.ceil(count/limit);
+    })
+
     Description
         .find({...search}, {patient: 1, createDate: 1, doctor: 1, disease: 1})
         .sort(sort)
+        .limit(limit).skip(startIndex)
         .then(docs => {
             if(!docs) console.log('error ->', err);
-            console.log(docs)
-            res.json(docs);
+            res.json([{"docs": docs}, {endPage}]);
         });
 });
 
