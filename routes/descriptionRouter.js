@@ -28,15 +28,24 @@ router.get("/search", (req, res) => {
   if (req.query.doctor) search.doctor = req.query.doctor;
   if (req.query.sort == "patient") sort = { patient: 1 };
 
+  const page = req.query.page;
+  const limit = 3;
+  const startIndex = (page - 1) * limit;
+  let endPage;
+  Description.countDocuments("_id", (err, count) => {
+    endPage = Math.ceil(count / limit);
+  });
+
   Description.find(
     { ...search },
     { patient: 1, createDate: 1, doctor: 1, disease: 1 }
   )
     .sort(sort)
+    .limit(limit)
+    .skip(startIndex)
     .then((docs) => {
       if (!docs) console.log("error ->", err);
-      console.log(docs);
-      res.json(docs);
+      res.json([docs, endPage]);
     });
 });
 
@@ -63,21 +72,21 @@ router.get("/diseaseInfo", (req, res) => {
     disease = new Disease({
       sickCd: disease_info.sickCd,
       sickNm: disease_info.sickNm,
-    })
+    });
     disease.save((err) => {
       if (err) console.log(err);
       res.json({ message: "insert" });
     });
-  })
-
-
+  });
 });
 //의약제품 정보 검색
 router.get("/medicineInfo", (req, res) => {
   // 품목, 저장방법, 성상등의 품목정보 등의 허가받은 의약제품정보를 상세정보로 제공
   var searchText2 = "마데카솔연고";
 
-  MdcinPrductPrmisnInfo.getMdcinPrductItem(searchText2).then(function (product) {
+  MdcinPrductPrmisnInfo.getMdcinPrductItem(searchText2).then(function (
+    product
+  ) {
     medicine = new Medicine({
       seq: product.seq,
       name: product.name,
@@ -85,12 +94,11 @@ router.get("/medicineInfo", (req, res) => {
       storage_method: product.storage_method,
       EE_DOC: product.EE_DOC,
       UD_DOC: product.UD_DOC,
-    })
+    });
     medicine.save((err) => {
       if (err) console.log(err);
       res.json({ message: "insert", medicine });
     });
-  })
-
-})
+  });
+});
 module.exports = router;
