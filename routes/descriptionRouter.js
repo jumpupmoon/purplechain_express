@@ -11,13 +11,11 @@ const app = express();
 app.use(express.json()); //bodyparser 사용 설정
 
 // 몽고 연결
-mongoose.connect(
-  "mongodb://purpleadmin:purple@localhost:27017/purple-chain",
-  (err) => {
-    if (err) console.error("mongodb connection error", err);
-    else console.log("db connected");
-  }
-);
+mongoose.connect('mongodb://purpleadmin:purple@localhost:30000/purple-chain', err => {
+    if(err) console.error('mongodb connection error', err);
+    else console.log('db connected');
+});
+
 
 // 처방전 검색
 router.get("/search", (req, res) => {
