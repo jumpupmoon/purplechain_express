@@ -14,7 +14,7 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   res.set({ "access-control-allow-origin": "*" }); //api 서버랑 다를때 해결
   var doctor = new Doctor();
-  doctor.hospital_id = req.body.hospital_id;
+  doctor.h_id = req.body.h_id;
   doctor.name = req.body.name;
   doctor.password = req.body.password;
   doctor.license = req.body.license;
