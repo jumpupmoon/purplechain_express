@@ -1,5 +1,15 @@
 const app = require("express").Router();
 const Doctor = require("../model/doctor");
+const mongoose = require("mongoose");
+
+// 몽고 연결
+mongoose.connect(
+  "mongodb://purpleadmin:purple@localhost:30000/purple-chain",
+  (err) => {
+    if (err) console.error("mongodb connection error", err);
+    else console.log("db connected");
+  }
+);
 
 // 모든 의사 데이터 조회
 app.get("/", function (req, res) {
