@@ -5,7 +5,7 @@ const cors = require("cors");
 
 // 몽고 연결
 mongoose.connect(
-  "mongodb://purpleadmin:purple@localhost:30000/purple-chain",
+  "mongodb://localhost/purple-chain",
   (err) => {
     if (err) console.error("mongodb connection error", err);
     else console.log("db connected");
