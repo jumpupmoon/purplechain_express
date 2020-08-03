@@ -34,9 +34,6 @@ router.get("/search", (req, res) => {
     });
   });
 
-  router.get("/hi", (req, res) => {
-    res.json({"hi":"hi"})
-  });  
-
+  
 
 module.exports = router;

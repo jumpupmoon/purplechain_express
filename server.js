@@ -14,12 +14,16 @@ const descriptionRouter = require("./routes/descriptionRouter");
 const descriptionMainRouter = require("./routes/descriptionMainRouter");
 const patientRouter = require("./routes/patientRouter");
 const diseaseRouter = require("./routes/diseaseRouter");
+const medicineRouter = require("./routes/medicineRouter");
 
 app.use("/api/description", descriptionRouter);
 app.use("/api/description", descriptionMainRouter);
 app.use("/api/board", boardRoute);
 app.use("/api/patient", patientRouter);
+//질병 정보와 관계된 라우터 등록
 app.use("/api/disease", diseaseRouter);
+//의약품 정보와 관련된 라우터 등록
+app.use("/api/medicine", medicineRouter);
 
 app.use("/api/descriptions", require("./routes/descriptions"));
 app.use("/api/doctors", require("./routes/doctors"));

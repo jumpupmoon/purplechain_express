@@ -1,7 +1,7 @@
 //var request = require("request");
 const request = require('request-promise-native');
 const convert = require("xml-js");
-var util = require('util');
+// var util = require('util');
 
 var MdcinPrductPrmisnInfoService = {};
 
