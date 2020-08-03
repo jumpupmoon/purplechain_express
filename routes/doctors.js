@@ -1,6 +1,7 @@
 const app = require("express").Router();
 const Doctor = require("../model/doctor");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 // 몽고 연결
 mongoose.connect(
