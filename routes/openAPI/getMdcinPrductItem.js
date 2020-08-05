@@ -43,6 +43,7 @@ MdcinPrductPrmisnInfoService.getMdcinPrductItem = async function (searchText) {
 
             var obj = JSON.parse(jsonObject);
             var MdcinPrduct = obj.response.body.items.item;
+            console.log("obj.response.body.items.item;",obj.response.body.items.item)
             //json 파일에서 원하는 정보 뽑아오기
             item_name = MdcinPrduct.ITEM_NAME._text;
             item_seq = MdcinPrduct.ITEM_SEQ._text;
@@ -81,7 +82,7 @@ MdcinPrductPrmisnInfoService.getMdcinPrductItem = async function (searchText) {
             //용법 용량(Usage-Dealing)
             //console.log("uddoc", MdcinPrduct.UD_DOC_DATA.DOC._attributes.title, "\n")
             var UD_DOC = [];
-            console.log("UD_DOC_DATA.ARTICLE", UD_DOC_DATA.ARTICLE);
+            //console.log("UD_DOC_DATA.ARTICLE", UD_DOC_DATA.ARTICLE);
             if (UD_DOC_DATA.ARTICLE instanceof Array) {
                 UD_DOC_DATA.ARTICLE.forEach(element => {
                     //console.log("title1", element._attributes.title);

@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 
 const Description = require("../model/description");
 const DiseaseInfo = require("./openAPI/getDissNameCodeList");
-const MdcinPrductPrmisnInfo = require("./openAPI/getMdcinPrductItem");
+
 const Disease = require("../model/disease");
-const Medicine = require("../model/medicine");
+
 const app = express();
 app.use(express.json()); //bodyparser 사용 설정
 
@@ -77,26 +77,5 @@ router.get("/diseaseInfo", (req, res) => {
     });
   });
 });
-//의약제품 정보 검색
-router.get("/medicineInfo", (req, res) => {
-  // 품목, 저장방법, 성상등의 품목정보 등의 허가받은 의약제품정보를 상세정보로 제공
-  var searchText2 = "마데카솔연고";
 
-  MdcinPrductPrmisnInfo.getMdcinPrductItem(searchText2).then(function (
-    product
-  ) {
-    medicine = new Medicine({
-      seq: product.seq,
-      name: product.name,
-      chart: product.chart,
-      storage_method: product.storage_method,
-      EE_DOC: product.EE_DOC,
-      UD_DOC: product.UD_DOC,
-    });
-    medicine.save((err) => {
-      if (err) console.log(err);
-      res.json({ message: "insert", medicine });
-    });
-  });
-});
 module.exports = router;
