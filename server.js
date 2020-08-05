@@ -25,9 +25,10 @@ app.use("/api/disease", diseaseRouter);
 //의약품 정보와 관련된 라우터 등록
 app.use("/api/medicine", medicineRouter);
 
+app.use(cors());
+
 app.use("/api/descriptions", require("./routes/descriptions"));
 app.use("/api/doctors", require("./routes/doctors"));
-app.use(cors());
 
 app.listen(port, function () {
   console.log("웹서버 시작!", port);
