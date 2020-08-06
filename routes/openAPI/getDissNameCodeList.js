@@ -11,7 +11,7 @@ var ServiceKey =
   "Y79MZBb9ME6yzBoRjLuTbaQPWv0HlA7U0KQ2wCnXlzzu8itvKlrURot8dqTHWmRpodg68%2BBr%2B0I%2Bg0HgHhKQIg%3D%3D";
 
 diseaseInfoService.getDissNameCodeList = async function (searchText) {
-  var Disease = {};
+  var Diseases = [];
 
   var url =
     "http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList";
@@ -68,17 +68,28 @@ diseaseInfoService.getDissNameCodeList = async function (searchText) {
     function (error, response, jsonObject) {
 
       var obj = JSON.parse(jsonObject);
-      sickCd = obj.response.body.items.item.sickCd;
-      sickNm = obj.response.body.items.item.sickNm;
-      Disease.sickCd = sickCd;
-      Disease.sickNm = sickNm;
+      console.log(jsonObject);
+      var sickCdInfoList = obj.response.body.items.item;
+      console.log("sickCdList123456",sickCdInfoList);
+      if(sickCdInfoList instanceof Array){
 
-    }
+        sickCdInfoList.forEach(sickCdInfo => {
+          let diseaseInfo = {};
+          diseaseInfo.sickCd = sickCdInfo.sickCd;
+          diseaseInfo.sickNm = sickCdInfo.sickNm;
+          Diseases.push(diseaseInfo);
+        })
+        console.log("배열일경우",Diseases);
+      }else{
+        let diseaseInfo = {};
+        diseaseInfo.sickCd = sickCdInfoList.sickCd;
+        diseaseInfo.sickNm = sickCdInfoList.sickNm;
+        Diseases.push(diseaseInfo);
+        console.log("배열이 아닐 경우",Diseases);
+      } 
+  
+   }
   )
-
-  return Disease;
-
-
-
+  return Diseases;
 };
 module.exports = diseaseInfoService;

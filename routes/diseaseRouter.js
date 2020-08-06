@@ -17,13 +17,10 @@ router.get("/search", (req, res) => {
   if (req.query.searchText) searchText = req.query.searchText;
   console.log(searchText);
 
-  DiseaseInfo.getDissNameCodeList(searchText).then(function (disease_info) {
-    disease = new Disease({
-      sickCd: disease_info.sickCd,
-      sickNm: disease_info.sickNm,
-    });
-    console.log(disease);
-    res.json(disease);
+  DiseaseInfo.getDissNameCodeList(searchText).then(function (diseaseInfoList) {
+    
+    console.log("chuuu",diseaseInfoList);
+    res.send(diseaseInfoList);
   });
 });
 
