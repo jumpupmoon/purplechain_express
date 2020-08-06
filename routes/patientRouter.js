@@ -1,16 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const Patient = require("../model/patient");
-
-// 몽고 연결
-mongoose.connect(
-  "mongodb://localhost/purple-chain",
-  (err) => {
-    if (err) console.error("mongodb connection error", err);
-    else console.log("db connected");
-  }
-);
 
 // 환자 검색
 router.get("/search", (req, res) => {

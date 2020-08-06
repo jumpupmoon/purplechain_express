@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 
 const Description = require("../model/description");
 const DiseaseInfo = require("./openAPI/getDissNameCodeList");
@@ -9,13 +8,6 @@ const Disease = require("../model/disease");
 
 const app = express();
 app.use(express.json()); //bodyparser 사용 설정
-
-// 몽고 연결
-mongoose.connect('mongodb://localhost/purple-chain', err => {
-    if(err) console.error('mongodb connection error', err);
-    else console.log('db connected');
-});
-
 
 // 처방전 검색
 router.get("/search", (req, res) => {

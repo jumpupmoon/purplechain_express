@@ -1,15 +1,5 @@
 const app = require("express").Router();
 const Description = require("../model/description");
-const mongoose = require("mongoose");
-
-// 몽고 연결
-mongoose.connect(
-  "mongodb://localhost/purple-chain",
-  (err) => {
-    if (err) console.error("mongodb connection error", err);
-    else console.log("db connected");
-  }
-);
 
 // 모든 처방전 데이터 조회
 app.get("/", function (req, res) {
