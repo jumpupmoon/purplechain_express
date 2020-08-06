@@ -35,7 +35,7 @@ boardRoutes.route('/read').get(function (req, res) {
       console.log(err);
     }
     else {
-        console.log(board);
+        //console.log(board);
       res.json(board);
     }
     
